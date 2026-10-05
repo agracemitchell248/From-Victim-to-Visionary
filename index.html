@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>From Victim to Visionary | The Liberation Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep-forest: #1a2e1a; --warm-clay: #8b4513; --gold: #c9a84c; --cream: #f5f0e8; --warm-white: #faf8f4;
+  --plum: #4a1942; --sage: #5a7a4a; --ember: #c05c2a; --charcoal: #2c2c2c; --mid: #6b6b6b; --border: #e0d8cc;
+  --gold-bg: #fdf6e3; --plum-bg: #f5eef5; --sage-bg: #eef4ee; --ember-bg: #fdf0ea;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { font-family: 'DM Sans', sans-serif; background: var(--deep-forest); color: var(--charcoal); }
+
+.page { display: flex; flex-direction: column; height: 100svh; height: 100dvh; max-width: 480px; margin: 0 auto; padding: 0.6rem 1rem 0.5rem; overflow: hidden; }
+.header { text-align: center; margin-bottom: 0.4rem; flex-shrink: 0; }
+.brand-row { display: flex; justify-content: flex-start; margin-bottom: 0.35rem; }
+.brand-logo { height: 20px; width: auto; display: block; }
+.logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: #fff; }
+.logo em { font-style: italic; color: var(--gold); }
+.logo-sub { font-size: 0.62rem; font-weight: 300; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.15rem; }
+
+.progress-wrap { margin-bottom: 0.5rem; flex-shrink: 0; }
+.progress-meta { display: flex; justify-content: space-between; font-size: 0.68rem; color: rgba(255,255,255,0.45); margin-bottom: 0.25rem; }
+.progress-track { height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; }
+.progress-fill { height: 3px; background: linear-gradient(90deg, var(--gold), var(--ember)); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+
+.card { background: var(--cream); border-radius: 18px; width: 100%; flex: 1; min-height: 0; box-shadow: 0 8px 40px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; }
+.screen { display: none; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+.screen.active { display: flex; }
+.card-body { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 1rem 1.1rem 0.7rem; }
+
+.section-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--gold); opacity: 0.4; line-height: 1; margin-bottom: 0.15rem; }
+.eyebrow { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ember); margin-bottom: 0.28rem; }
+.screen-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.2; color: var(--deep-forest); margin-bottom: 0.5rem; }
+.screen-desc { font-size: 0.78rem; line-height: 1.4; color: var(--charcoal); margin-bottom: 0.6rem; }
+
+.affirmations { background: var(--plum-bg); border-left: 3px solid var(--plum); border-radius: 0 10px 10px 0; padding: 0.6rem 0.85rem; margin: 0.6rem 0; }
+.affirmations p { font-size: 0.74rem; line-height: 1.38; color: #3a1535; margin-bottom: 0.28rem; }
+.affirmations p:last-child { margin-bottom: 0; }
+
+.pull-quote { font-family: 'Playfair Display', serif; font-size: 0.82rem; font-style: italic; line-height: 1.4; color: var(--deep-forest); border-left: 3px solid var(--gold); padding: 0.55rem 0.85rem; margin: 0.65rem 0; background: var(--gold-bg); border-radius: 0 10px 10px 0; }
+
+.info-box { border-radius: 10px; padding: 0.65rem 0.8rem; margin: 0.6rem 0; }
+.info-box.gold { background: var(--gold-bg); border-left: 4px solid var(--gold); }
+.info-box.ember { background: var(--ember-bg); border-left: 4px solid var(--ember); }
+.info-box.plum { background: var(--plum-bg); border-left: 4px solid var(--plum); }
+.info-box.sage { background: var(--sage-bg); border-left: 4px solid var(--sage); }
+.info-box-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.4rem; }
+.info-box p { font-size: 0.76rem; line-height: 1.4; color: var(--charcoal); margin-bottom: 0.4rem; }
+.info-box p:last-child { margin-bottom: 0; }
+.info-box strong { color: var(--deep-forest); }
+
+.thought-grid { display: flex; flex-direction: column; gap: 0.4rem; margin: 0.6rem 0; }
+.thought-card { display: flex; align-items: flex-start; gap: 0.55rem; padding: 0.6rem 0.7rem; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--warm-white); text-align: left; }
+.thought-card.selected { border-color: var(--ember); background: var(--ember-bg); }
+.thought-emoji { font-size: 1rem; flex-shrink: 0; }
+.thought-text { font-size: 0.74rem; line-height: 1.35; color: var(--charcoal); flex: 1; }
+.thought-check { width: 15px; height: 15px; border-radius: 50%; background: var(--ember); display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0; }
+.thought-card.selected .thought-check { opacity: 1; }
+.thought-check::after { content: '✓'; color: #fff; font-size: 0.6rem; }
+
+.isha-response { background: var(--deep-forest); border-radius: 12px; padding: 0.8rem 0.9rem; margin: 0.6rem 0; color: rgba(255,255,255,0.9); display: none; }
+.isha-response.visible { display: block; }
+.isha-response-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.isha-response-text { font-size: 0.78rem; line-height: 1.5; font-family: 'Playfair Display', serif; font-style: italic; color: rgba(255,255,255,0.88); }
+.isha-loading { display: flex; gap: 4px; align-items: center; padding: 0.3rem 0; }
+.isha-loading span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 1.2s infinite ease-in-out; }
+.isha-loading span:nth-child(2) { animation-delay: 0.2s; }
+.isha-loading span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }
+
+.cycle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.6rem 0; }
+.cycle-card { border-radius: 10px; padding: 0.6rem 0.65rem; cursor: pointer; border: 2px solid transparent; }
+.cycle-card.regulate { background: var(--sage-bg); border-color: var(--sage); }
+.cycle-card.research { background: var(--gold-bg); border-color: var(--gold); }
+.cycle-card.reclaim { background: var(--ember-bg); border-color: var(--ember); }
+.cycle-card.liberate { background: var(--plum-bg); border-color: var(--plum); }
+.cycle-card.selected { box-shadow: 0 0 0 2px var(--ember); }
+.cycle-step { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.2rem; }
+.cycle-card h3 { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 600; color: var(--deep-forest); margin-bottom: 0.25rem; }
+.cycle-card p { font-size: 0.68rem; line-height: 1.3; color: var(--charcoal); }
+.cycle-selected-badge { display: none; align-items: center; gap: 0.3rem; margin-top: 0.35rem; font-size: 0.62rem; font-weight: 500; color: var(--ember); }
+.cycle-card.selected .cycle-selected-badge { display: flex; }
+.cycle-locate-prompt { text-align: center; font-size: 0.76rem; color: var(--mid); font-style: italic; margin: 0.4rem 0 0.5rem; }
+
+.gap-card { border-radius: 12px; overflow: hidden; margin-bottom: 0.6rem; border: 1.5px solid var(--border); background: var(--warm-white); }
+.gap-card-question { padding: 0.7rem 0.8rem; }
+.gap-card-question p { font-family: 'Playfair Display', serif; font-size: 0.82rem; font-style: italic; line-height: 1.4; color: var(--deep-forest); margin-bottom: 0.55rem; }
+.gap-source { font-size: 0.66rem; color: var(--mid); font-style: normal; font-family: 'DM Sans', sans-serif; margin-bottom: 0.5rem; }
+.gap-response-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.gap-btn { padding: 0.4rem 0.7rem; border-radius: 8px; font-size: 0.68rem; font-weight: 500; cursor: pointer; border: 1.5px solid var(--border); background: var(--cream); color: var(--charcoal); }
+.gap-btn.selected { background: var(--ember); color: #fff; border-color: var(--ember); }
+.gap-btn.no-selected { background: var(--sage-bg); color: var(--sage); border-color: var(--sage); }
+.gap-reveal { padding: 0.65rem 0.8rem; border-top: 1px solid var(--border); background: var(--gold-bg); display: none; }
+.gap-reveal.visible { display: block; }
+.gap-reveal-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-clay); margin-bottom: 0.35rem; }
+.gap-reveal p { font-size: 0.73rem; line-height: 1.4; color: var(--charcoal); }
+
+.pillar-select-grid { display: flex; flex-direction: column; gap: 0.45rem; margin: 0.6rem 0; }
+.pillar-select-card { border-radius: 10px; padding: 0.6rem 0.75rem; border: 1.5px solid var(--border); background: var(--warm-white); cursor: pointer; }
+.pillar-select-card.selected { border-color: var(--ember); background: var(--ember-bg); }
+.pillar-select-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
+.pillar-select-title { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 600; color: var(--deep-forest); }
+.pillar-select-check { width: 17px; height: 17px; border-radius: 50%; background: var(--ember); display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0; }
+.pillar-select-card.selected .pillar-select-check { opacity: 1; }
+.pillar-select-check::after { content: '✓'; color: #fff; font-size: 0.6rem; }
+.pillar-select-example { font-size: 0.68rem; color: var(--mid); font-style: italic; line-height: 1.35; margin-bottom: 0.3rem; }
+.pillar-select-desc { font-size: 0.72rem; line-height: 1.4; color: var(--charcoal); }
+
+.reflect-block { background: var(--ember-bg); border-radius: 10px; padding: 0.65rem 0.75rem; margin: 0.6rem 0; border-left: 4px solid var(--ember); }
+.reflect-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ember); margin-bottom: 0.3rem; }
+.reflect-question { font-size: 0.78rem; line-height: 1.4; color: var(--charcoal); margin-bottom: 0.45rem; }
+
+.letter-area { background: var(--warm-white); border: 1.5px solid var(--border); border-radius: 12px; padding: 0.85rem; margin: 0.6rem 0; }
+.letter-salutation { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--deep-forest); margin-bottom: 0.5rem; font-style: italic; }
+.letter-signature-wrap { margin-top: 0.75rem; border-top: 1px solid var(--border); padding-top: 0.6rem; }
+.letter-signature-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.3rem; }
+.letter-signature-input { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; border: none; border-bottom: 2px solid var(--gold); background: transparent; width: 100%; padding: 0.25rem 0.05rem; color: var(--deep-forest); outline: none; }
+
+.breath-prompt { background: var(--deep-forest); border-radius: 12px; padding: 0.9rem 1rem; margin: 0.6rem 0; text-align: center; color: rgba(255,255,255,0.85); }
+.breath-text { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-style: italic; color: var(--gold); margin-bottom: 0.5rem; line-height: 1.4; }
+.breath-sub { font-size: 0.72rem; color: rgba(255,255,255,0.55); line-height: 1.4; margin-bottom: 0.7rem; }
+.breath-btn { display: inline-block; background: transparent; border: 1.5px solid rgba(201,168,76,0.5); color: var(--gold); padding: 0.5rem 1.1rem; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.76rem; cursor: pointer; }
+
+textarea { width: 100%; min-height: 55px; border: 1.5px solid var(--border); border-radius: 10px; padding: 0.55rem 0.65rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; resize: none; background: var(--warm-white); color: var(--charcoal); line-height: 1.4; }
+textarea:focus { outline: none; border-color: var(--ember); }
+textarea::placeholder { color: #b0a898; font-style: italic; }
+textarea.letter-body { min-height: 110px; }
+
+.expect-list { list-style: none; margin: 0.5rem 0; }
+.expect-list li { font-size: 0.75rem; line-height: 1.4; color: var(--charcoal); padding: 0.32rem 0 0.32rem 0.8rem; border-bottom: 1px solid var(--border); position: relative; }
+.expect-list li:last-child { border-bottom: none; }
+.expect-list li::before { content: '\2022'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+.completion-icon { font-size: 1.7rem; color: var(--gold); margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; }
+.completion-divider { width: 40px; height: 2px; background: var(--gold); margin: 0.8rem auto; border-radius: 2px; }
+
+.tea-cta { background: var(--deep-forest); border-radius: 12px; padding: 0.9rem; margin: 0.7rem 0 0; text-align: center; }
+.tea-cta-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ember); margin-bottom: 0.4rem; }
+.tea-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; color: #fff; margin-bottom: 0.4rem; }
+.tea-cta p { font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.4; margin-bottom: 0.7rem; }
+.btn-rise { display: inline-block; background: var(--gold); color: var(--deep-forest); border-radius: 10px; padding: 0.6rem 1.3rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
+
+.download-card { background: var(--deep-forest); border-radius: 12px; padding: 0.9rem; margin: 0.7rem 0 0; text-align: center; }
+.download-card h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #fff; margin-bottom: 0.3rem; }
+.download-card p { font-size: 0.72rem; color: rgba(255,255,255,0.55); line-height: 1.4; margin-bottom: 0.7rem; }
+.btn-download { display: block; width: 100%; background: var(--ember); color: #fff; border: none; border-radius: 10px; padding: 0.65rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; }
+
+.nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1.15rem; border-top: 1px solid var(--border); background: var(--cream); gap: 0.6rem; flex-shrink: 0; }
+.btn { padding: 0.55rem 1.1rem; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; cursor: pointer; border: none; }
+.btn-primary { background: var(--ember); color: #fff; }
+.btn-ghost { background: transparent; color: var(--mid); border: 1.5px solid var(--border); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.fire-box { background: var(--deep-forest); border-radius: 12px; padding: 0.8rem 0.9rem; margin: 0.6rem 0; color: rgba(255,255,255,0.88); }
+.fire-box-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.fire-box p { font-size: 0.76rem; line-height: 1.4; margin-bottom: 0.35rem; }
+.fire-box p:last-child { margin-bottom: 0; }
+.fire-box em { color: var(--gold); font-style: normal; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="logo">&#127807; The <em>Liberation</em> Series</div>
+    <div class="logo-sub">From Victim to Visionary</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-meta"><span id="stepLabel">Step 1 of 13</span><span id="stepPct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="card">
+
+    <!-- 1: Welcome -->
+    <div class="screen active" id="screen1">
+      <div class="card-body">
+        <div class="eyebrow">Welcome</div>
+        <h1 class="screen-title">From Victim to Visionary</h1>
+        <p class="screen-desc">You've done the regulation work. You let your body be seen. Now we turn toward what happened, not to stay inside it, but to decide what it is allowed to build.</p>
+        <p class="screen-desc">This is the Research part of the cycle. We are going to look at the systems that failed you with eyes of curiosity, and notice what they missed.</p>
+        <div class="affirmations">
+          <p>&#10022; This space is entirely yours. Nothing you write here is wrong.</p>
+          <p>&#10022; Your anger is information. Your grief is information. Both belong here.</p>
+          <p>&#10022; You can pause, breathe, or step away at any time. This work will be here when you return.</p>
+        </div>
+        <ul class="expect-list">
+          <li>Naming the thought that has been loudest</li>
+          <li>The reframe that takes you from victim to visionary</li>
+          <li>Writing your own refrain</li>
+          <li>Flipping the meaning of the word "audit"</li>
+          <li>Finding where companies are failing, and what that points to</li>
+        </ul>
+      </div>
+      <div class="nav-bar" style="justify-content:flex-end;"><button class="btn btn-primary" onclick="advance(2)">Begin &rarr;</button></div>
+    </div>
+
+    <!-- 2: Grounding -->
+    <div class="screen" id="screen2">
+      <div class="card-body" style="text-align:center;">
+        <div class="eyebrow">Opening Practice</div>
+        <h2 class="screen-title">Before We Research, We Regulate.</h2>
+        <div class="breath-prompt">
+          <div class="breath-text">"You cannot skip Regulate and land in Liberation."</div>
+          <div class="breath-sub">Feel your feet on the floor. Breathe in for 4, hold for 4, out for 6. Do it three times. Let your exhale be longer than your inhale.</div>
+          <div class="breath-sub" style="margin-bottom:0;">If your body is still spiking, go back to the regulation activity in <em>The Urgency of the Unknown</em> first. This work will be here when you return.</div>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(1)">&larr; Back</button><button class="btn btn-primary" onclick="advance(3)">I'm Here &rarr;</button></div>
+    </div>
+
+    <!-- 3: Thought cards -->
+    <div class="screen" id="screen3">
+      <div class="card-body">
+        <div class="section-num">01</div>
+        <div class="eyebrow">Name It</div>
+        <h2 class="screen-title">What's Been Living in Your Head?</h2>
+        <p class="screen-desc">There's a thought you've been carrying. <em>Tap the one that's been loudest.</em></p>
+        <div class="thought-grid" id="thoughtGrid" data-req-group=".selected">
+          <button class="thought-card" onclick="selectThought(this,'A')"><span class="thought-emoji">&#127807;</span><span class="thought-text">"Why didn't they fight for me? I gave them everything."</span><span class="thought-check"></span></button>
+          <button class="thought-card" onclick="selectThought(this,'B')"><span class="thought-emoji">&#127810;</span><span class="thought-text">"Maybe I wasn't good enough after all. Maybe they were right."</span><span class="thought-check"></span></button>
+          <button class="thought-card" onclick="selectThought(this,'C')"><span class="thought-emoji">&#127793;</span><span class="thought-text">"I keep waiting for someone to fix this. No one is coming."</span><span class="thought-check"></span></button>
+          <button class="thought-card" onclick="selectThought(this,'D')"><span class="thought-emoji">&#127806;</span><span class="thought-text">"I'm angry, but I don't know what to do with all of this."</span><span class="thought-check"></span></button>
+          <button class="thought-card" onclick="selectThought(this,'E')"><span class="thought-emoji">&#127940;</span><span class="thought-text">"I feel invisible. Like everything I built just disappeared."</span><span class="thought-check"></span></button>
+        </div>
+        <div class="isha-response" id="ishaMirrorResponse"><div class="isha-response-text" id="ishaMirrorText"><div class="isha-loading"><span></span><span></span><span></span></div></div></div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(2)">&larr; Back</button><button class="btn btn-primary" onclick="advance(4)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 4: Victim to visionary -->
+    <div class="screen" id="screen4">
+      <div class="card-body">
+        <div class="section-num">02</div>
+        <div class="eyebrow">Core Teaching</div>
+        <h2 class="screen-title">From Victim to Visionary</h2>
+        <p class="screen-desc">A victim mentality is not a character flaw. It is a protective shell. It keeps us rooted in the <em>why</em> of our pain, the loop that whispers, "Look what they did to me."</p>
+        <p class="screen-desc">That loop tethers your identity to a moment of rejection. Stepping into the role of visionary doesn't ignore the hurt. It reclaims your power by deciding what that hurt is allowed to <em>build.</em></p>
+        <div class="info-box ember">
+          <div class="info-box-label">Advocacy Is the Bridge</div>
+          <p>It transforms a personal wound into a public resource, moving you from passive observation of your circumstances into active creation of a solution.</p>
+          <p>You don't have to be healed to begin. You have to be willing to <strong>let the wound point somewhere.</strong></p>
+        </div>
+        <blockquote class="pull-quote">"They did fire me and I didn't deserve it, but I am choosing to believe it happened <em>for</em> me. I am no longer a casualty of their system; I am an advocate for Black women, ensuring they have the financial resources and are cared for."</blockquote>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(3)">&larr; Back</button><button class="btn btn-primary" onclick="advance(5)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 5: Refrain -->
+    <div class="screen" id="screen5">
+      <div class="card-body">
+        <div class="eyebrow">Reflect</div>
+        <h2 class="screen-title">Write Your Refrain</h2>
+        <p class="screen-desc">Not toxic positivity. Not pretending it was okay. It was not okay. And you are using it anyway.</p>
+        <div class="reflect-block">
+          <div class="reflect-question">In your own words, what happened, and who are you choosing to advocate for now? Not the professional version. The real one.</div>
+          <textarea id="r_refrain" placeholder="They did ___ and I didn't deserve it. But I am choosing to believe it happened for me. I am no longer a casualty of their system; I am an advocate for..."></textarea>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(4)">&larr; Back</button><button class="btn btn-primary" onclick="advance(6)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 6: Cycle -->
+    <div class="screen" id="screen6">
+      <div class="card-body">
+        <div class="section-num">03</div>
+        <div class="eyebrow">The Framework</div>
+        <h2 class="screen-title">Regulate. Research. Reclaim. Liberation.</h2>
+        <p class="screen-desc">You met this cycle in <em>The Urgency of the Unknown.</em> This guide lives in Research. But your body decides where you actually are.</p>
+        <p class="cycle-locate-prompt">Tap the step that feels true right now.</p>
+        <div class="cycle-grid" data-req-group=".selected">
+          <div class="cycle-card regulate" onclick="selectCycle(this,'Regulate')"><div class="cycle-step">Step 01</div><h3>Regulate</h3><p>Your nervous system must feel safe enough to think clearly.</p><div class="cycle-selected-badge">&#10022; I am here</div></div>
+          <div class="cycle-card research" onclick="selectCycle(this,'Research')"><div class="cycle-step">Step 02</div><h3>Research</h3><p>From a regulated place, ask real questions.</p><div class="cycle-selected-badge">&#10022; I am here</div></div>
+          <div class="cycle-card reclaim" onclick="selectCycle(this,'Reclaim')"><div class="cycle-step">Step 03</div><h3>Reclaim</h3><p>Take back what the system said wasn't valuable.</p><div class="cycle-selected-badge">&#10022; I am here</div></div>
+          <div class="cycle-card liberate" onclick="selectCycle(this,'Liberation')"><div class="cycle-step">Step 04</div><h3>Liberation</h3><p>The business emerges from this place.</p><div class="cycle-selected-badge">&#10022; I am here</div></div>
+        </div>
+        <div class="isha-response" id="ishaCycleResponse"><div class="isha-response-text" id="ishaCycleText"><div class="isha-loading"><span></span><span></span><span></span></div></div></div>
+        <div class="reflect-block">
+          <div class="reflect-question">What does it feel like in your body to be in that place right now? Notice. Don't fix. Just name it.</div>
+          <textarea id="r_cycle" placeholder="Notice what comes up. You don't have to solve it."></textarea>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(5)">&larr; Back</button><button class="btn btn-primary" onclick="advance(7)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 7: Flipping the audit -->
+    <div class="screen" id="screen7">
+      <div class="card-body">
+        <div class="section-num">04</div>
+        <div class="eyebrow">Core Teaching</div>
+        <h2 class="screen-title">Flipping the Script on the Audit.</h2>
+        <p class="screen-desc">We are often taught to fear the word <em>audit.</em> We've been conditioned to think of it as a moment where we are being judged, picked apart, or measured against someone else's ruler.</p>
+        <p class="screen-desc">In this space, we are flipping the script.</p>
+        <blockquote class="pull-quote">"An audit isn't something being done to you. It is a tool being used <em>by</em> you. We are not victims."</blockquote>
+        <div class="info-box gold">
+          <div class="info-box-label">What You're Auditing</div>
+          <p>The companies, workplaces, and products that didn't see you. You are the one holding the clipboard now.</p>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(6)">&larr; Back</button><button class="btn btn-primary" onclick="advance(8)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 8: Starting your audit -->
+    <div class="screen" id="screen8">
+      <div class="card-body">
+        <div class="section-num">04</div>
+        <div class="eyebrow">Core Teaching</div>
+        <h2 class="screen-title">Starting Your Audit.</h2>
+        <p class="screen-desc">When you start your audit, you're looking for where companies are failing. You aren't just finding gaps. You are identifying the pain points of your future buyers.</p>
+        <p class="screen-desc">Use your eyes of curiosity to see the path they missed.</p>
+        <div class="fire-box">
+          <div class="fire-box-label">What People Buy</div>
+          <p>If you can <em>solve a problem,</em> speak to a <em>specific pain,</em> or make life <em>more convenient,</em> people will buy.</p>
+        </div>
+        <div class="reflect-block">
+          <div class="reflect-question">What problem have you personally lived that others are still stuck inside?</div>
+          <textarea id="r_lived" placeholder="Start with your own body. Where did it hurt, and who else is hurting the same way?"></textarea>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(7)">&larr; Back</button><button class="btn btn-primary" onclick="advance(9)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 9: Gaps 1-2 -->
+    <div class="screen" id="screen9">
+      <div class="card-body">
+        <div class="section-num">05</div>
+        <div class="eyebrow">Worksheet &middot; The Audit</div>
+        <h2 class="screen-title">Where Companies Are Failing</h2>
+        <p class="screen-desc" style="font-style:italic; color:var(--mid);">Read each gap. Tap your honest response.</p>
+        <div class="gap-card" id="gap1">
+          <div class="gap-card-question">
+            <div class="gap-source">Hormone Disruptors &amp; Carcinogens</div>
+            <p>"Mainstream brands use ingredients that aggravate hormones and cause cancer."</p>
+            <div class="gap-response-btns" data-req-group=".selected, .no-selected">
+              <button class="gap-btn" onclick="respondToGap('gap1','yes',this)">Yes, I've felt this</button>
+              <button class="gap-btn" onclick="respondToGap('gap1','watched',this)">I've watched others</button>
+              <button class="gap-btn" onclick="respondToGap('gap1','no',this)">Not my area</button>
+            </div>
+          </div>
+          <div class="gap-reveal" id="gap1-reveal"><div class="gap-reveal-label">What This Could Build</div><p>A skincare line formulated with zero hormone disruptors or cancer-causing chemicals. You are solving a life-or-death pain point.</p></div>
+        </div>
+        <div class="gap-card" id="gap2">
+          <div class="gap-card-question">
+            <div class="gap-source">Cardiovascular Neglect</div>
+            <p>"Food companies use high-sodium, low-nutrient fillers that hurt heart health."</p>
+            <div class="gap-response-btns" data-req-group=".selected, .no-selected">
+              <button class="gap-btn" onclick="respondToGap('gap2','yes',this)">Yes, I've felt this</button>
+              <button class="gap-btn" onclick="respondToGap('gap2','watched',this)">I've watched others</button>
+              <button class="gap-btn" onclick="respondToGap('gap2','no',this)">Not my area</button>
+            </div>
+          </div>
+          <div class="gap-reveal" id="gap2-reveal"><div class="gap-reveal-label">What This Could Build</div><p>A food and nutrition brand featuring hibiscus, beets, and magnesium, heart-friendly and blood-pressure friendly. You are offering people their health back.</p></div>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(8)">&larr; Back</button><button class="btn btn-primary" onclick="advance(10)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 10: Gaps 3-4 -->
+    <div class="screen" id="screen10">
+      <div class="card-body">
+        <div class="section-num">05</div>
+        <div class="eyebrow">Worksheet &middot; The Audit</div>
+        <h2 class="screen-title">Two More Gaps</h2>
+        <div class="gap-card" id="gap3">
+          <div class="gap-card-question">
+            <div class="gap-source">Economic Instability</div>
+            <p>"Companies offer no path for financial literacy or wealth for Black women."</p>
+            <div class="gap-response-btns" data-req-group=".selected, .no-selected">
+              <button class="gap-btn" onclick="respondToGap('gap3','yes',this)">Yes, I've felt this</button>
+              <button class="gap-btn" onclick="respondToGap('gap3','watched',this)">I've watched others</button>
+              <button class="gap-btn" onclick="respondToGap('gap3','no',this)">Not my area</button>
+            </div>
+          </div>
+          <div class="gap-reveal" id="gap3-reveal"><div class="gap-reveal-label">What This Could Build</div><p>A business ecosystem that builds in financial literacy and economic stability for its community.</p></div>
+        </div>
+        <div class="gap-card" id="gap4">
+          <div class="gap-card-question">
+            <div class="gap-source">Transaction Over Wellness</div>
+            <p>"Consulting firms treat clients like numbers, ignoring their emotional state."</p>
+            <div class="gap-response-btns" data-req-group=".selected, .no-selected">
+              <button class="gap-btn" onclick="respondToGap('gap4','yes',this)">Yes, I've felt this</button>
+              <button class="gap-btn" onclick="respondToGap('gap4','watched',this)">I've watched others</button>
+              <button class="gap-btn" onclick="respondToGap('gap4','no',this)">Not my area</button>
+            </div>
+          </div>
+          <div class="gap-reveal" id="gap4-reveal"><div class="gap-reveal-label">What This Could Build</div><p>A supportive wellness ecosystem where client regulation and community building are the primary service.</p></div>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(9)">&larr; Back</button><button class="btn btn-primary" onclick="advance(11)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 11: Gap reflection -->
+    <div class="screen" id="screen11">
+      <div class="card-body">
+        <div class="eyebrow">Reflect</div>
+        <h2 class="screen-title">What Stopped You</h2>
+        <div class="reflect-block">
+          <div class="reflect-question">Which gap lived in your body? Name what it actually felt like to be inside of it.</div>
+          <textarea id="r_gap" placeholder="Take your time. There's no right answer here."></textarea>
+        </div>
+        <div class="info-box sage"><p>What stopped you is pointing somewhere. That is your research. Hold onto it.</p></div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(10)">&larr; Back</button><button class="btn btn-primary" onclick="advance(12)">Continue &rarr;</button></div>
+    </div>
+
+    <!-- 12: Closing -->
+    <div class="screen" id="screen12">
+      <div class="card-body">
+        <div class="eyebrow">Closing</div>
+        <h2 class="screen-title">The Gap Has Your Name on It.</h2>
+        <p class="screen-desc">You came in carrying a thought. You are leaving with evidence. The places that failed you are the places your future buyers are still waiting for someone to show up.</p>
+        <blockquote class="pull-quote">"I am no longer a casualty of their system."</blockquote>
+        <p class="screen-desc" style="font-style:italic;">Next, we take what you found and build from it. <em>The Business of Audacity and Advocacy</em> will be waiting when you are ready.</p>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(11)">&larr; Back</button><button class="btn btn-primary" onclick="advance(13)">Complete This Chapter &rarr;</button></div>
+    </div>
+
+    <!-- 13: Completion -->
+    <div class="screen" id="screen13">
+      <div class="card-body" style="text-align:center;">
+        <div class="completion-icon">&#10022;</div>
+        <h2 class="screen-title" style="text-align:center;">You showed up for yourself today.</h2>
+        <div class="completion-divider"></div>
+        <p class="screen-desc" style="text-align:left;">You named the loudest thought, wrote your refrain, and turned the audit into a tool in your own hands.</p>
+        <p class="screen-desc" style="text-align:left;">That is the work. The wound has direction now.</p>
+        <div class="download-card"><h4>Download Your Reflections</h4><p>A formatted record of everything you wrote today, yours to keep.</p><button class="btn-download" onclick="downloadPDF()">Download PDF &rarr;</button></div>
+        <div class="tea-cta">
+          <div class="tea-cta-label">You Don't Have to Do This Alone</div>
+          <h3>Come Have Tea With Us</h3>
+          <p>Pull up a chair. Ask the real questions. Be witnessed.</p>
+          <a href="https://www.unbrokenpathways.org/isha-gaines-med-lpc" target="_blank" class="btn-rise">Let's Rise Together &rarr;</a>
+        </div>
+      </div>
+      <div class="nav-bar"><button class="btn btn-ghost" onclick="advance(12)">&larr; Back</button><span></span></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function advance(n) {
+  document.getElementById('screen' + currentScreen).classList.remove('active');
+  document.getElementById('screen' + n).classList.add('active');
+  currentScreen = n;
+  updateProgress(n);
+  if (typeof onScreen === 'function') onScreen(n);
+}
+function updateProgress(step) {
+  const pct = Math.round(((step - 1) / (TOTAL_SCREENS - 1)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('stepLabel').textContent = 'Step ' + step + ' of ' + TOTAL_SCREENS;
+  document.getElementById('stepPct').textContent = pct + '%';
+}
+function showIshaResponse(boxId, textId, message) {
+  const box = document.getElementById(boxId);
+  const textEl = document.getElementById(textId);
+  box.classList.add('visible');
+  textEl.innerHTML = '<div class="isha-loading"><span></span><span></span><span></span></div>';
+  setTimeout(() => { textEl.textContent = message; }, 700);
+}
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function openReflections(title, sections, extra) {
+  const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  let rows = '';
+  sections.forEach(s => {
+    const val = s.val ? s.val() : (document.getElementById(s.id)?.value.trim() || '');
+    if (!val) return;
+    rows += `<div class="pdf-section"><div class="pdf-label">${s.label}</div><div class="pdf-content">${esc(val).replace(/\n/g, '<br>')}</div></div>`;
+  });
+  rows += extra || '';
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>body{font-family:'DM Sans',sans-serif;color:#2c2c2c;max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem;background:#faf8f4;}.pdf-header{text-align:center;border-bottom:2px solid #c9a84c;padding-bottom:1.5rem;margin-bottom:2rem;}.pdf-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:#1a2e1a;margin-bottom:0.3rem;}.pdf-date{font-size:0.82rem;color:#6b6b6b;}.pdf-section{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid #e0d8cc;}.pdf-label{font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#c05c2a;margin-bottom:0.5rem;}.pdf-content{font-size:0.95rem;line-height:1.75;white-space:pre-wrap;}.pdf-sig{text-align:center;}.pdf-signature{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:#1a2e1a;border-bottom:2px solid #c9a84c;display:inline-block;padding-bottom:0.2rem;}.pdf-footer{text-align:center;font-size:0.72rem;color:#b0a898;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e0d8cc;}</style>
+</head><body><div class="pdf-header"><div style="font-size:2rem;">&#127807;</div><div style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#6b6b6b;">The Liberation Series</div><div class="pdf-title">${title}</div><div class="pdf-date">${date}</div></div>${rows}<div class="pdf-footer">The Liberation Series &middot; unbrokenpathways.org<br>Created with care by Places to Thrive, Inc. &copy; 2025</div></body></html>`;
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(() => win.print(), 800);
+}
+
+let currentScreen = 1;
+const TOTAL_SCREENS = 13;
+let selectedThought = null, selectedCycle = null;
+const gapAnswers = {};
+
+const thoughtLabels = {A:"Why didn't they fight for me?", B:"Maybe I wasn't good enough after all.", C:"I keep waiting. No one is coming.", D:"I'm angry but don't know what to do with it.", E:"I feel invisible."};
+const thoughtResponses = {
+  A: `That question, "Why didn't they fight for me?", is one of the most painful ones a person can carry. You gave them your best, and they let you go anyway. That is a real wound. The fact that you're asking that question means you already understand your value. What you're carrying is not doubt, it's grief. And grief is the beginning of direction.`,
+  B: `That thought, "maybe they were right," is one of the most insidious lies the system plants in us. What happened to you was a decision made by people with limited vision or their own fear. Their inability to see you clearly says nothing about what you are actually capable of building.`,
+  C: `"No one is coming." Sit with that for a moment, because what you just named is actually a moment of profound clarity. Not defeat. The business you're here to build was always going to require you to stop waiting. You're not behind. You're just beginning.`,
+  D: `Your anger is not the problem. It is information, pointing at something real. The question is not how to make it go away, it's what does it want to build? Anger, when it has direction, becomes advocacy.`,
+  E: `Invisible. That word carries so much weight. But here's the truth: the work you did was real. What disappears is the container, not what you built inside yourself. And that is exactly what your business will be made from.`
+};
+function selectThought(el, key) {
+  document.querySelectorAll('.thought-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedThought = key;
+  showIshaResponse('ishaMirrorResponse', 'ishaMirrorText', thoughtResponses[key]);
+}
+
+const cycleResponses = {
+  Regulate: `Regulate. You named it honestly, and that takes courage. Being in Regulate doesn't mean you're behind. It means you know what your body needs before you build. Go gently through what comes next, and go back to your regulation tools whenever you need them.`,
+  Research: `Research. You're regulated enough to think clearly, which means the questions you're asking right now are worth answering. What you're about to discover is confirmation that the gap you felt in your body is a gap that exists in the world.`,
+  Reclaim: `Reclaim. You're taking back what the system said wasn't valuable. Every piece of experience you dismissed as "just my story" is about to become an asset. The audit ahead will sharpen what you're already reaching for.`,
+  Liberation: `Liberation. You're in it, or close. Building from liberation looks different than building from fear. Slower sometimes, more intentional, but it lasts. Let the audit confirm what your body already knows.`
+};
+function selectCycle(el, name) {
+  document.querySelectorAll('.cycle-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedCycle = name;
+  showIshaResponse('ishaCycleResponse', 'ishaCycleText', cycleResponses[name]);
+}
+
+const gapNames = {gap1:'Hormone disruptors and carcinogens', gap2:'Cardiovascular neglect', gap3:'Economic instability', gap4:'Transaction over wellness'};
+const gapLabels = {yes:"I've felt this", watched:"I've watched others", no:'Not my area'};
+function respondToGap(gapId, response, btn) {
+  const card = document.getElementById(gapId);
+  card.querySelectorAll('.gap-btn').forEach(b => b.classList.remove('selected', 'no-selected'));
+  btn.classList.add(response === 'no' ? 'no-selected' : 'selected');
+  gapAnswers[gapId] = response;
+  const reveal = document.getElementById(gapId + '-reveal');
+  if (reveal) reveal.classList.add('visible');
+}
+
+function downloadPDF() {
+  openReflections('From Victim to Visionary', [
+    { label: 'The Thought I Named', val: () => selectedThought ? thoughtLabels[selectedThought] : '' },
+    { label: 'My Refrain, From Victim to Visionary', id: 'r_refrain' },
+    { label: 'Where I Am in the Cycle', val: () => selectedCycle || '' },
+    { label: 'My Body in the Cycle', id: 'r_cycle' },
+    { label: 'A Problem I Have Lived', id: 'r_lived' },
+    { label: 'My Audit', val: () => Object.keys(gapNames).filter(k => gapAnswers[k] && gapAnswers[k] !== 'no').map(k => gapNames[k] + ': ' + gapLabels[gapAnswers[k]]).join('\n') },
+    { label: 'The Gap That Stopped Me', id: 'r_gap' },
+  ]);
+}
+
+updateProgress(1);
+</script>
+<style>
+/* Required-answer guard */
+.req-missing { outline: 2px solid #c0392b !important; outline-offset: 2px; border-radius: 8px; }
+.req-msg { display: none; flex-shrink: 0; margin: 0 1rem 0.45rem; padding: 0.5rem 0.75rem; border-radius: 8px; background: #fdf0ef; border: 1px solid #e8b4b0; color: #a93226; font-family: inherit; font-size: 0.74rem; line-height: 1.35; text-align: left; }
+.req-msg.show { display: block; }
+.req-locked { opacity: 0.55; }
+</style>
+<script>
+/* Required-answer guard: the forward/submit button only works once every
+   visible question in the current screen is answered.
+   - textareas, text/email inputs and selects must be filled
+   - radio groups need a choice; sliders must be moved or tapped
+   - [data-req-group="<selector>"] needs at least one matching child (chips, checkboxes, pips)
+   - [data-req-custom="<name>"] uses window.REQ_CUSTOM[name]()
+   - [data-optional] opts a field out (an optional email must still be valid if filled)
+   - [data-req-always] keeps a field required while hidden (e.g. one-at-a-time questions)
+   - [data-req-scope] limits an inner "Next" button to its own block
+   - [data-req-final] on a submit button re-checks every screen */
+(function () {
+  var CFG = Object.assign({
+    screens: '.screen',
+    active: '.screen.active',
+    forward: '.nav-bar .btn-primary',
+    msg: 'Please answer every question on this screen before continuing.'
+  }, window.REQ_CONFIG || {});
+  var CUSTOM = window.REQ_CUSTOM || {};
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var shown = [];
+
+  function hiddenIn(node, root) {
+    for (var n = node; n && n !== root; n = n.parentElement) {
+      if (getComputedStyle(n).display === 'none') return true;
+    }
+    return false;
+  }
+  function skip(el, root) {
+    if (el.closest('[data-optional]')) return true;
+    if (el.closest('[data-req-always]')) return false;
+    return hiddenIn(el.closest('label') || el, root);
+  }
+  function filled(el) {
+    if (el.tagName === 'SELECT') return !!el.value;
+    var v = el.value.trim();
+    if (!v) return false;
+    return el.type !== 'email' || EMAIL_RE.test(v);
+  }
+
+  function requirements(root) {
+    var items = [];
+    root.querySelectorAll('textarea, input[type="text"], input[type="email"], select').forEach(function (el) {
+      if (el.type === 'email' && el.closest('[data-optional]') && !hiddenIn(el, root)) {
+        items.push({ mark: el, ok: function () { return !el.value.trim() || EMAIL_RE.test(el.value.trim()); } });
+        return;
+      }
+      if (skip(el, root)) return;
+      items.push({ mark: el, ok: function () { return filled(el); } });
+    });
+    var radios = {};
+    root.querySelectorAll('input[type="radio"][name]').forEach(function (el) {
+      if (skip(el, root) || radios[el.name]) return;
+      radios[el.name] = true;
+      var name = el.name;
+      var label = el.closest('label') || el;
+      items.push({
+        mark: label.parentElement || label,
+        ok: function () { return !!root.querySelector('input[type="radio"][name="' + CSS.escape(name) + '"]:checked'); }
+      });
+    });
+    root.querySelectorAll('input[type="range"]').forEach(function (el) {
+      if (skip(el, root)) return;
+      items.push({ mark: el.parentElement, ok: function () { return el.dataset.touched === '1'; } });
+    });
+    root.querySelectorAll('[data-req-group]').forEach(function (el) {
+      if (el.closest('[data-optional]') || (!el.closest('[data-req-always]') && hiddenIn(el, root))) return;
+      var sel = el.getAttribute('data-req-group');
+      items.push({ mark: el, ok: function () { return !!el.querySelector(sel); } });
+    });
+    root.querySelectorAll('[data-req-custom]').forEach(function (el) {
+      if (hiddenIn(el, root)) return;
+      var fn = CUSTOM[el.getAttribute('data-req-custom')];
+      if (fn) items.push({ mark: el, ok: function () { return !!fn(el); } });
+    });
+    return items;
+  }
+  function missing(root) {
+    return requirements(root).filter(function (r) { return !r.ok(); });
+  }
+
+  function activeScreen() { return document.querySelector(CFG.active); }
+  function scopeFor(btn) {
+    return btn.closest('[data-req-scope]') || btn.closest(CFG.screens) || activeScreen();
+  }
+  function msgBox(btn) {
+    var host = btn.closest('[data-req-scope]') ? btn : (btn.closest('.nav-bar, .nav') || btn);
+    var prev = host.previousElementSibling;
+    if (prev && prev.classList.contains('req-msg')) return prev;
+    var box = document.createElement('div');
+    box.className = 'req-msg';
+    box.setAttribute('role', 'alert');
+    host.parentNode.insertBefore(box, host);
+    return box;
+  }
+  function clearShown() {
+    shown.forEach(function (r) { r.mark.classList.remove('req-missing'); });
+    shown = [];
+  }
+
+  function block(btn, list, text) {
+    if (list.every(function (r) { return r.mark.matches('input[type="email"]'); })) {
+      text = 'Please enter a valid email address' + (list[0].mark.closest('[data-optional]') ? ', or leave it blank.' : '.');
+    }
+    clearShown();
+    list.forEach(function (r) { r.mark.classList.add('req-missing'); });
+    shown = list;
+    var box = msgBox(btn);
+    box.textContent = text;
+    box.classList.add('show');
+    var first = list[0].mark;
+    if (first.getClientRects().length) {
+      first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (first.matches('textarea, input, select')) first.focus({ preventScroll: true });
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest(CFG.forward + ', .question-next, [data-req-final]');
+    if (!btn || btn.disabled) return;
+    var screen = activeScreen();
+    if (!screen) return;
+    var inScreen = screen.contains(btn);
+    if (!inScreen && !btn.matches(CFG.forward)) return;
+
+    if (btn.hasAttribute('data-req-final')) {
+      var all = document.querySelectorAll(CFG.screens);
+      for (var i = 0; i < all.length; i++) {
+        var gaps = missing(all[i]);
+        if (!gaps.length) continue;
+        e.preventDefault(); e.stopImmediatePropagation();
+        if (all[i] === screen) block(btn, gaps, screen.getAttribute('data-req-msg') || CFG.msg);
+        else block(btn, gaps, 'Step ' + (i + 1) + ' still has unanswered questions. Please go back and complete it before submitting.');
+        return;
+      }
+      return;
+    }
+
+    var scope = inScreen ? scopeFor(btn) : screen;
+    var gaps = missing(scope);
+    if (!gaps.length) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    block(btn, gaps, scope.getAttribute('data-req-msg') || CFG.msg);
+  }, true);
+
+  function refresh() {
+    if (shown.length) {
+      shown = shown.filter(function (r) {
+        if (r.ok()) { r.mark.classList.remove('req-missing'); return false; }
+        return true;
+      });
+      if (!shown.length) document.querySelectorAll('.req-msg.show').forEach(function (b) { b.classList.remove('show'); });
+    }
+    var screen = activeScreen();
+    document.querySelectorAll('.req-locked').forEach(function (b) { b.classList.remove('req-locked'); });
+    if (!screen) return;
+    var btns = Array.prototype.slice.call(screen.querySelectorAll(CFG.forward + ', .question-next'));
+    document.querySelectorAll(CFG.forward).forEach(function (b) { if (!b.closest(CFG.screens) && btns.indexOf(b) < 0) btns.push(b); });
+    btns.forEach(function (b) {
+      var scope = screen.contains(b) ? scopeFor(b) : screen;
+      if (missing(scope).length) b.classList.add('req-locked');
+    });
+  }
+  function later() { setTimeout(refresh, 0); }
+
+  function touch(e) {
+    if (e.target.matches && e.target.matches('input[type="range"]')) e.target.dataset.touched = '1';
+  }
+  document.addEventListener('pointerdown', touch, true);
+  document.addEventListener('keydown', touch, true);
+  document.addEventListener('input', function (e) { touch(e); later(); }, true);
+  document.addEventListener('change', later, true);
+  document.addEventListener('click', function (e) {
+    // a new screen should start without stale warnings
+    if (e.target.closest('.btn-ghost, #btn-back')) {
+      clearShown();
+      document.querySelectorAll('.req-msg.show').forEach(function (b) { b.classList.remove('show'); });
+    }
+    later();
+  });
+  document.addEventListener('keyup', later);
+  refresh();
+})();
+</script>
+</body>
+</html>
